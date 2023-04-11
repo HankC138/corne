@@ -7,6 +7,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/rgb.h>
 
 &led_strip { chain-length = <42>; };
 / {
@@ -27,12 +28,12 @@
                 };
                 lower_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+// |  RGB |  !  |  @  |  #  |  MUTE  |  LeftPAR  |   |  RightPAR  |  &  |  *  |  `  |  =  | + |
+// | TRANS | BT1 | BT2 | BT4 | VOL UP | LeftBRK |   | RightBRK | TRANS |  UP | ~ | - |  _  |
+// | SHIFT | BTCLR | BT3 |  BT5   | VOL DN    | LeftBRC |   | RightBRC | LEFT | DOWN  | RIGHT | / |  PIPE  |
+//                   | TERM |     | TRANS |   | MAGNET |     |RETURN | TRANS | ALT |
                         bindings = <
-  &kp K_MUTE  &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp LPAR         &kp RPAR  &kp AMPS  &kp KP_MULTIPLY &kp GRAVE &kp EQUAL &kp PLUS
+  &rgb_ug RGB_TOG  &kp EXCL     &kp AT       &kp HASH     &kp K_MUTE     &kp LPAR         &kp RPAR  &kp AMPS  &kp KP_MULTIPLY &kp GRAVE &kp EQUAL &kp PLUS
    &trans  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 3 &kp C_VOL_UP       &kp LBKT         &kp RBKT  &trans    &kp UP          &kp TILDE &kp MINUS &kp UNDER
    &kp LSHFT  &bt BT_CLR   &bt BT_SEL 2 &bt BT_SEL 4 &kp C_VOL_DN       &kp LBRC         &kp RBRC  &kp LEFT   &kp DOWN          &kp RIGHT   &kp BSLH  &kp PIPE
                     	                &kp LC(GRAVE)     &trans       &kp LC(RALT)        &kp RET   &trans    &kp RALT
@@ -41,10 +42,10 @@
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+// |  TRANS |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+// | TRANS  | 1   | 2   | 3   | 4   | 5   |   |  6  |  7  |  8  |  9  |  0  |  TRANS   |
+// | SHFT |  TRANS   |  TRANS   |  TRANS   | TRANS    | HOME  |   |  END  |  TRANS  |  TRANS  |  TRANS  | TRANS |  SCREENCAP   |
+//                    | GUI |  TRANS | SPACE |   | ENT |  TRANS | ALT |
                         bindings = <
  &trans    &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT      &kp CARET   &kp AMPS   &kp KP_MULTIPLY    &kp LPAR    &kp RPAR &kp BSPC
    &trans     &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8    &kp N9    &kp N0 &trans
