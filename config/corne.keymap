@@ -8,7 +8,11 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-&led_strip { chain-length = <42>; };
+#define DEFAULT 0
+#define LOWER 1
+#define RAISE 2
+#define ADJUST 3
+#define ZBRUSH 4
 
 / {
     conditional_layers {
@@ -29,6 +33,7 @@
 // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
 // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
 //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+                        label = "DEF"
                         bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
    &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
@@ -39,43 +44,61 @@
 
                 lower_layer {
 // -----------------------------------------------------------------------------------------
-// |  trans |  trans  |  trans  |  #  |  MUTE  |  LeftPAR  |   |  RightPAR  |  &  |  *  |  `  |  =  | + |
-// | TRANS | BT1 | BT2 | BT4 | VOL UP | LeftBRK |   | RightBRK | TRANS |  UP | ~ | - |  _  |
-// | SHIFT | BTCLR | BT3 |  BT5   | VOL DN    | LeftBRC |   | RightBRC | LEFT | DOWN  | RIGHT | / |  PIPE  |
-//                   | TERM |     | TRANS |   | MAGNET |     |RETURN | TRANS | ALT |
+// | TRANS | ! | @ | # | $ | % |   | ^ | & | * |  (  |  )  |  \  |
+// | TRANS | 1 | 2 | 3 | 4 | 5 |   | - | = | ` | LBRK | RBRK |  PIPE  |
+// | TRANS | 6 | 7 | 8 | 9 | 0 |   | _ | + | ~ | LBRC | RBRC |  TRANS  |
+//                   | TERM |     | TRANS |   | TRANS |     |RETURN | TRANS | ALT |
+                        label = "LOW"
                         bindings = <
-  &trans  &trans     &trans       &kp HASH     &kp K_MUTE     &kp LPAR         &kp RPAR  &kp AMPS  &kp KP_MULTIPLY &kp GRAVE &kp EQUAL &kp PLUS
-   &trans  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 3 &kp C_VOL_UP       &kp LBKT         &kp RBKT  &trans    &kp UP          &kp TILDE &kp MINUS &kp UNDER
-   &kp LSHFT  &bt BT_CLR   &bt BT_SEL 2 &bt BT_SEL 4 &kp C_VOL_DN       &kp LBRC         &kp RBRC  &kp LEFT   &kp DOWN          &kp RIGHT   &kp BSLH  &kp PIPE
-                    	                &kp LC(GRAVE)     &trans       &kp LC(RALT)        &kp RET   &trans    &kp RALT
+  &trans    &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT      &kp CARET   &kp AMPS   &kp KP_MULTIPLY    &kp LPAR    &kp RPAR &kp BSLH
+   &trans  &kp N1       &kp N2        &kp N3       &kp N4       &kp N5          &kp MINUS  &kp EQUAL    &kp GRAVE          &kp LBKT &kp RBKT &kp PIPE
+   &trans  &kp N6       &kp N7        &kp N8       &kp N9       &kp N0         &kp UNDER  &kp PLUS   &kp TILDE          &kp LBRC   &kp RBRC  &trans
+                    	                &kp LC(GRAVE)     &trans       &trans        &kp RET   &trans    &kp RALT
                         >;
                 };
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
-// |  TRANS |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | TRANS  | 1   | 2   | 3   | 4   | 5   |   |  6  |  7  |  8  |  9  |  0  |  TRANS   |
-// | SHFT |  TRANS   |  TRANS   |  TRANS   | TRANS    | HOME  |   |  END  |  TRANS  |  TRANS  |  TRANS  | TRANS |  SCREENCAP   |
-//                    | GUI |  TRANS | SPACE |   | ENT |  TRANS | ALT |
+// |  TRANS |  TRANS  |  TRANS  |  TRANS  |  MUTE  |  TRANS  |   |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  | TRANS |
+// | TRANS  | TRANS   | TRANS   | PREV   | VOLUP   | NEXT   |   |  HOME  |  END  |  UP  |  DOCSTART  |  DOCEND  |  TURBOLOG   |
+// | TRANS |  TRANS   |  TRANS   |  TRANS   | VOLDN    | PLAYPAUSE  |   |  TRANS  |  LEFT  |  DOWN  |  RIGHT  | TRANS |  SCREENCAP   |
+//                    | GUI |  TRANS | MAGNET |   | ENT |  TRANS | ALT |
+                        label = "RSE"
                         bindings = <
- &trans    &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT      &kp CARET   &kp AMPS   &kp KP_MULTIPLY    &kp LPAR    &kp RPAR &kp BSPC
-   &trans     &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8    &kp N9    &kp N0 &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &kp HOME        &kp END &trans &trans &trans    &trans &kp LS(LG(LC(N4)))
-                          	       &kp LGUI        &trans       &kp SPACE    &kp RET  &trans   &kp RALT
+ &trans    &trans     &trans       &trans     &kp K_MUTE     &trans      &trans   &trans   &trans    &trans    &trans &trans
+   &trans     &trans       &trans       &kp C_PREV       &kp C_VOL_UP       &kp C_NEXT         &kp HOME   &kp END   &kp UP    &kp LG(UP)    &kp LG(DOWN) &kp LC(LA(L))
+   &trans  &trans       &trans       &trans       &kp C_VOL_DN       &kp C_PP        &trans &kp LEFT &kp DOWN &kp RIGHT    &trans &kp LS(LG(LC(N4)))
+                          	       &kp LGUI        &trans       &kp LC(RALT)    &kp RET  &trans   &kp RALT
                         >;
                 };      
         
                 adjust_layer {
 // -----------------------------------------------------------------------------------------
-// |  TRANS |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | TRANS  | 1   | 2   | 3   | 4   | 5   |   |  6  |  7  |  8  |  9  |  0  |  TRANS   |
-// | SHFT |  TRANS   |  TRANS   |  TRANS   | TRANS    | HOME  |   |  END  |  TRANS  |  TRANS  |  TRANS  | TRANS |  SCREENCAP   |
+// |  ZBRUSH |  !  |  @  |  #  |  MUTE  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+// | TRANS  | TRANS   | TRANS  | PREV   | VOLUP  | NEXT   |   |  TRANS  |  TRANS  |  TRANS  |  TRANS  | TRANS  |  EMOJI   |
+// | SHFT |  TRANS   |  TRANS   |  VOLDN   | TRANS    | HOME  |   |  END  |  TRANS  |  PASTEFOLDER  |  COPY  | PASTE |  SCREENCAP   |
 //                    | GUI |  TRANS | SPACE |   | ENT |  TRANS | ALT |
+                        label = "ADJ"
                         bindings = <
- &trans    &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT      &kp CARET   &kp AMPS   &kp KP_MULTIPLY    &kp LPAR    &kp RPAR &kp BSPC
-   &trans     &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8    &kp N9    &kp N0 &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &kp HOME        &kp END &trans &trans &trans    &trans &kp LS(LG(LC(N4)))
+ &tog ZBRUSH    &kp EXCL     &kp AT       &kp HASH     &kp K_MUTE     &kp PRCNT      &bt BT_0   &bt BT_1   &bt BT_2    &bt BT_3    &bt BT_4 &bt BT_CLR
+   &trans     &trans       &trans       &kp C_PREV       &kp C_VOL_UP       &kp C_NEXT         &trans   &trans   &trans    &trans    &trans &kp LG(LC(SPACE))
+   &kp LSHFT  &trans       &trans       &trans       &kp C_VOL_DN       &kp C_PP        &kp END &trans &kp LA(LG(V)) &kp LG(C)    &kp LG(V) &kp LS(LG(LC(N4)))
                           	       &kp LGUI        &trans       &kp SPACE    &kp RET  &trans   &kp RALT
+                        >;
+                };      
+
+                zbrush_layer {
+// -----------------------------------------------------------------------------------------
+// |  ZBRUSH |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  SAVE  |  CLEARCAN  |  SPOTLIGHT  |  TRANS  |  TRANS  | QUICKSAVE |
+// | TRANS  | TRANS   | TRANS   | TRANS   | TRANS   | TRANS   |   |  Q  |  W  |  E  |  R  |  0  |  SHIFT   |
+// | TRANS |  TRANS   |  TRANS   |  TRANS   | TRANS    | TRANS  |   |  B  |  X  |  LBKT  |  RBKT  | ALT |  CTRL   |
+//                    | TRANS |  TRANS | TRANS |   | SPACE |  UNDO | REDO |
+                        label = "ZBR"
+                        bindings = <
+ &tog ZBRUSH    &trans     &trans       &trans     &trans     &trans      &kp LC(S)   &kp LC(N)   &kp LS(Z)    &trans    &trans &kp N9
+   &trans     &trans       &trans       &trans       &trans       &trans         &kp Q   &kp W   &kp E    &kp R    &kp N0 &kp LSHFT
+   &trans  &trans       &trans       &trans       &trans      &trans        &kp B &kp X  &kp LBKT  &kp RBKT &kp RALT    &kp LCTRL
+                          	       &trans        &trans       &trans    &kp SPACE  &kp LC(Z)   &kp LC(LS(Z))
                         >;
                 };      
         };
