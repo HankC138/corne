@@ -4,8 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: test-bt-instant-passed-fix
+      remote: petejohanson
+      revision: zephyr/test-bt-instant-passed-fix
       import: app/west.yml
   self:
     path: config
