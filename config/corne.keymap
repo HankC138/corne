@@ -60,15 +60,15 @@
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
-// |  TRANS |  TRANS  |  TRANS  |  TRANS  |  MUTE  |  TRANS  |   |  CURSORUP  |  CURSORDOWN  |  DUPLINEUP  |  DUPLINEDOWN  |  ZOOMOUT  | ZOOMIN |
-// | TRANS  | TRANS   | TRANS   | PREV   | VOLUP   | NEXT   |   |  HOME  |  END  |  UP  |  DOCSTART  |  DOCEND  |  TURBOLOG   |
-// | TRANS |  TRANS   |  TRANS   |  TRANS   | VOLDN    | PLAYPAUSE  |   |  TRANS  |  LEFT  |  DOWN  |  RIGHT  | TRANS |  SCREENCAP   |
+// |  TRANS |  TRANS  |  TRANS  |  TRANS  |  MUTE  |  TRANS  |   |  HOME  |  END  |  DUPLINEDOWN | DUPCURSORDN |  ZOOMOUT  | ZOOMIN |
+// | TRANS  | TRANS   | TRANS   | PREV   | VOLUP   | NEXT   |   |  LEFT  |  UP  | DOWN  |  RIGHT  |  TRANS  |  TURBOLOG   |
+// | TRANS |  TRANS   |  TRANS   |  TRANS   | VOLDN    | PLAYPAUSE  |   |  MVLINEUP  |  MVLINEDN  | TRANS |  TRANS  | TRANS |  SCREENCAP   |
 //                    | GUI |  TRANS | MAGNET |   | ENT |  TRANS | ALT |
                         label = "RSE";
                         bindings = <
- &trans    &trans     &trans       &trans     &kp K_MUTE     &trans      &kp LC(LA(UP))   &kp LC(LA(DOWN))   &kp LA(LS(UP))    &kp LA(LS(DOWN))    &kp LG(MINUS) &kp LG(PLUS)
-   &trans     &trans       &trans       &kp C_PREV       &kp C_VOL_UP       &kp C_NEXT         &kp HOME   &kp END   &kp UP    &kp LG(UP)    &kp LG(DOWN) &kp LC(LA(L))
-   &trans  &trans       &trans       &trans       &kp C_VOL_DN       &kp C_PP        &trans &kp LEFT &kp DOWN &kp RIGHT    &trans &kp LS(LG(LC(N4)))
+ &trans    &trans     &trans       &trans     &kp K_MUTE     &trans      &kp HOME   &kp END   &kp LA(LS(DOWN))   &kp LA(LG(DOWN))   &kp LG(MINUS) &kp LG(PLUS)
+   &trans     &trans       &trans       &kp C_PREV       &kp C_VOL_UP       &kp C_NEXT         &kp LEFT  &kp UP   &kp DOWN    &kp RIGHT   &trans &kp LC(LA(L))
+   &trans  &trans       &trans       &trans       &kp C_VOL_DN       &kp C_PP        &kp LA(UP) &kp LA(DOWN) &trans &trans    &trans &kp LS(LG(LC(N4)))
                           	       &kp LGUI        &trans       &kp LC(RALT)    &kp RET  &trans   &kp RALT
                         >;
                 };      
